@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <h1>Flip Cards</h1>
+    <button id="openModalBtn">Select Type</button>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Type</h2>
+            <div class="difficulty-selector">
+                <label for="difficulty">Select Type:</label>
+                <select id="difficulty" name="difficulty">
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
     <div class="bg-white p-6 ">
         <div class="grid grid-cols-4 gap-4 ">
             <div class="card">
@@ -97,7 +116,7 @@
     <audio id="myAudio" controls>
         <source src="click_music.mp3" type="audio/mpeg">
     </audio>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
