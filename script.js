@@ -54,3 +54,47 @@ document.addEventListener("DOMContentLoaded", function () {
 //     modal.style.display = "none";
 //   }
 // }
+// ----------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    var imgPaths = [
+        "assets/akil.jpeg",
+        "assets/asha.jpeg",
+        "assets/jey.webp",
+        "assets/theekshi.webp",
+        "assets/pattabi.jpeg",
+        "assets/vicky.jpeg"
+    ];
+
+  
+    function shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
+
+    
+    function setImgSrc() {
+        var shuffledPaths = shuffle(imgPaths.concat(imgPaths)); 
+        var cards = document.querySelectorAll('.card img');
+        cards.forEach(function(card, index) {
+            card.src = shuffledPaths[index];
+            card.parentElement.classList.remove('flipped'); 
+        });
+    }
+
+   
+    setImgSrc();
+
+  
+    var refreshbtn = document.querySelector('button');
+    refreshbtn.addEventListener('click', function() {
+        setImgSrc();
+    });
+});
+
