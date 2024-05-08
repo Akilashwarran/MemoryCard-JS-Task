@@ -1,37 +1,111 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".card");
-    var audio = document.getElementById('myAudio');
-    cards.forEach((card) => {
-        card.addEventListener("click", function () {
-            card.classList.toggle("flipped");
+    let cards = document.querySelectorAll(".card");
+    let audio = document.getElementById('myAudio');
+    let timerDisplay = document.getElementById('timer');
+    let flipsDisplay = document.getElementById('flips');
+    let flips = 0;
+    let matchedCards = [];
+    let firstCard, secondCard;
+    let lockBoard = false;
+    let timer;
 
-            //----------- audio --------------
+   function flipCard() {
+    if (lockBoard) return;
+    if (this === firstCard) return;
 
-            audio.play()
- 
-            //----------- animations -------------------
+    this.classList.add('flipped');
 
-            const colors = ["#ffcc00", "#ff6699", "#66ccff", "#99ff99"];
-            const shapes = ["circle", "square", "triangle"];
+    // Play audio
+    audio.play();
+      flips++;
+        flipsDisplay.textContent = 'Flips: ' + flips;
+    // Animation
+    let colors = ["#ffcc00", "#ff6699", "#66ccff", "#99ff99"];
+    let shapes = ["circle", "square", "triangle"];
 
-            const numSprinkles = 50;
-            for (let i = 0; i < numSprinkles; i++) {
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const shape = shapes[Math.floor(Math.random() * shapes.length)];
-                const sprinkles = document.createElement("div");
-                sprinkles.classList.add("sprinkles");
-                sprinkles.style.backgroundColor = color;
-                sprinkles.style.borderRadius = shape === "circle" ? "50%" : shape === "triangle" ? "50% 50% 0 0" : "0";
-                sprinkles.style.left = Math.random() * 100 + "%";
-                sprinkles.style.top = Math.random() * 100 + "%";
-                card.appendChild(sprinkles);
-                setTimeout(() => {
-                    sprinkles.remove();
-                }, Math.random() * 1000);
+    let numSprinkles = 50;
+    for (let i = 0; i < numSprinkles; i++) {
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        let shape = shapes[Math.floor(Math.random() * shapes.length)];
+        let sprinkles = document.createElement("div");
+        sprinkles.classList.add("sprinkles");
+        sprinkles.style.backgroundColor = color;
+        sprinkles.style.borderRadius = shape === "circle" ? "50%" : shape === "triangle" ? "50% 50% 0 0" : "0";
+        sprinkles.style.left = Math.random() * 100 + "%";
+        sprinkles.style.top = Math.random() * 100 + "%";
+        this.appendChild(sprinkles);
+        setTimeout(() => {
+            sprinkles.remove();
+        }, Math.random() * 1000);
+    }
+
+    if (!firstCard) {
+        firstCard = this;
+        return;
+    }
+
+    secondCard = this;
+    checkForMatch();
+}
+
+
+    function checkForMatch() {
+        let isMatch = firstCard.querySelector('img').src === secondCard.querySelector('img').src;
+       
+
+        if (isMatch) {
+            disableCards();
+            matchedCards.push(firstCard, secondCard);
+            if (matchedCards.length === cards.length) {
+                clearInterval(timer);
+                alert('Congratulations! You won!');
             }
-        });
-    });
+        } else {
+            lockBoard = true;
+            setTimeout(() => {
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                resetBoard();
+            }, 1000);
+        }
+    }
+
+    function disableCards() {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+
+        resetBoard();
+    }
+
+    function resetBoard() {
+        [firstCard, secondCard] = [null, null];
+        lockBoard = false;
+    }
+
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        let interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Time: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                lockBoard = true;
+                alert('Time is up!');
+            }
+        }, 1000);
+    }
+
+    cards.forEach(card => card.addEventListener('click', flipCard));
+
+    startTimer(20, timerDisplay);
 });
+
 
 //----------------------- selection types -------------------
 
