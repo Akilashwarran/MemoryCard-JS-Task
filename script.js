@@ -104,33 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cards.forEach(card => card.addEventListener('click', flipCard));
 
     startTimer(20, timerDisplay);
-});
-
-
-//----------------------- selection types -------------------
-
-// var modal = document.getElementById("modal");
-
-// var btn = document.getElementById("openModalBtn");
-
-// var span = document.getElementsByClassName("close")[0];
-
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-// ----------------------------------------------------------------
-
-document.addEventListener("DOMContentLoaded", function() {
 
     var imgPaths = [
         "assets/akil.jpeg",
@@ -170,5 +143,34 @@ document.addEventListener("DOMContentLoaded", function() {
     refreshbtn.addEventListener('click', function() {
         setImgSrc();
     });
+});
+
+
+//----------------------- selection types -------------------
+
+// var modal = document.getElementById("modal");
+
+// var btn = document.getElementById("openModalBtn");
+
+// var span = document.getElementsByClassName("close")[0];
+
+// btn.onclick = function() {
+//   modal.style.display = "block";
+// }
+
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+// ----------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  
 });
 

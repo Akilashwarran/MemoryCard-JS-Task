@@ -7,116 +7,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- <button id="openModalBtn">Select Type</button>
-    
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Select Type</h2>
-            <div class="difficulty-selector">
-                <label for="difficulty">Select Type:</label>
-                <select id="difficulty" name="difficulty">
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-            </div>
-        </div>
-    </div> -->
-
     <div class="bg-white p-6 ">
         <div class="grid grid-cols-4 gap-4 ">
             <div class="card">
                 <div class="card-inner">
-                    <div class="card-front colors"></div>
-                    <div class="card-back"><img src="assets/akil.jpeg" alt="Image 1"></div>
+                    <div class="card-front "></div>
+                    <div class="card-back"><img src="assets/akil.png" alt="Image 1"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/asha.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/asha.png" alt="Image 2"></div>
                 </div>
             </div>
             
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/jey.webp" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/jey.png" alt="Image 2"></div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/theekshi.webp" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/theekshi.png" alt="Image 2"></div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/akil.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/akil.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/asha.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/asha.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/theekshi.webp" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/theekshi.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/jey.webp" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/jey.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/pattabi.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/pattabi.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/vicky.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/vicky.png" alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/pattabi.jpeg "alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/pattabi.png "alt="Image 2"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-inner">
                     <div class="card-front"></div>
-                    <div class="card-back"><img src="assets/vicky.jpeg" alt="Image 2"></div>
+                    <div class="card-back"><img src="assets/vicky.png" alt="Image 2"></div>
                 </div>
             </div>
 
         </div>
 
         <div class="game-info">
-            
-            <span>Time : <div id="timer">20s</div></span> |
-            <span>Flips : 0</span> |
-            <button>Refresh</button>
+            <span id="timer">Time: 20s</span> |
+            <span id="flips">Flips: 0</span> |
+            <button onclick="resetGame()">Refresh</button>
         </div>
     </div>
-
+    
     <audio id="myAudio" controls>
         <source src="click_music.mp3" type="audio/mpeg">
     </audio>
-
+    
     <script src="script.js"></script>
+   
 </body>
 </html>
