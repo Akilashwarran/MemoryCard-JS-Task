@@ -7,19 +7,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let matchedCards = [];
     let firstCard, secondCard;
     let lockBoard = false;
-    let timer;
+    let timer; // Declare timer globally
 
-   function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+    function flipCard() {
+        if (lockBoard) return;
+        if (this === firstCard) return;
 
-    this.classList.add('flipped');
+        this.classList.add('flipped');
 
-    // Play audio
-    audio.play();
-      flips++;
+        // Play audio
+        audio.play();
+        flips++;
         flipsDisplay.textContent = 'Flips: ' + flips;
-    // Animation
+        // Animation
+       
+
+        if (!firstCard) {
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        checkForMatch();
+         startTimer(20, timerDisplay);
+    }
+    function addSprinkles() {
     let colors = ["#ffcc00", "#ff6699", "#66ccff", "#99ff99"];
     let shapes = ["circle", "square", "triangle"];
 
@@ -33,25 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
         sprinkles.style.borderRadius = shape === "circle" ? "50%" : shape === "triangle" ? "50% 50% 0 0" : "0";
         sprinkles.style.left = Math.random() * 100 + "%";
         sprinkles.style.top = Math.random() * 100 + "%";
-        this.appendChild(sprinkles);
+        document.body.appendChild(sprinkles); // Add sprinkles to the body
         setTimeout(() => {
             sprinkles.remove();
         }, Math.random() * 1000);
     }
-
-    if (!firstCard) {
-        firstCard = this;
-        return;
-    }
-
-    secondCard = this;
-    checkForMatch();
 }
-
 
     function checkForMatch() {
         let isMatch = firstCard.querySelector('img').src === secondCard.querySelector('img').src;
-       
 
         if (isMatch) {
             disableCards();
@@ -68,12 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resetBoard();
             }, 1000);
         }
+       
     }
 
     function disableCards() {
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
-
+         addSprinkles();
         resetBoard();
     }
 
@@ -83,7 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startTimer(duration, display) {
-        let timer = duration, minutes, seconds;
+        timer = duration; 
+        let minutes, seconds;
         let interval = setInterval(function () {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
@@ -103,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cards.forEach(card => card.addEventListener('click', flipCard));
 
-    startTimer(20, timerDisplay);
+   
 
     var imgPaths = [
         "assets/akil.jpeg",
@@ -114,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "assets/vicky.jpeg"
     ];
 
-  
+
     function shuffle(array) {
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -125,24 +129,32 @@ document.addEventListener("DOMContentLoaded", function () {
         return array;
     }
 
-    
+
     function setImgSrc() {
-        var shuffledPaths = shuffle(imgPaths.concat(imgPaths)); 
+        var shuffledPaths = shuffle(imgPaths.concat(imgPaths));
         var cards = document.querySelectorAll('.card img');
-        cards.forEach(function(card, index) {
+        cards.forEach(function (card, index) {
             card.src = shuffledPaths[index];
-            card.parentElement.classList.remove('flipped'); 
+            card.parentElement.classList.remove('flipped');
         });
     }
 
-   
+
     setImgSrc();
 
-  
+
     var refreshbtn = document.querySelector('button');
-    refreshbtn.addEventListener('click', function() {
-        setImgSrc();
-    });
+     refreshbtn.addEventListener('click', function() {
+    flips = 0; 
+    flipsDisplay.textContent = 'Flips: ' + flips; 
+    
+    // clearInterval(startTimer()); 
+   
+    // startTimer(20, timerDisplay);
+    
+    setImgSrc(); 
+});
+
 });
 
 
