@@ -8,8 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let firstCard, secondCard;
     let lockBoard = false;
     let timer;
-
+    let timerStarted = false;
     function flipCard() {
+        if (!timerStarted) {
+            startTimer(19, timerDisplay); 
+            timerStarted = true;
+        }
         if (lockBoard) return;
         if (this === firstCard) return;
 
@@ -29,7 +33,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
         secondCard = this;
         checkForMatch();
-         startTimer(19, timerDisplay);
+         
+    }
+    function startTimer(duration, display) {
+        let timer = duration;
+        let interval = setInterval(function () {
+            let minutes = parseInt(timer / 60, 10);
+            let seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Time: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                lockBoard = true;
+                display.textContent = "Time: 00:00";
+                openModal('Time is up!');
+            }
+
+        }, 1000);
     }
     function addSprinkles() {
     let colors = ["#ffcc00", "#ff6699", "#66ccff", "#99ff99"];
@@ -83,29 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function resetBoard() {
         [firstCard, secondCard] = [null, null];
         lockBoard = false;
-    }
-
-    function startTimer(duration, display) {
-        timer = duration; 
-        let minutes, seconds;
-        let interval = setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = "Time: " + minutes + ":" + seconds;
-
-                    if (--timer < 0) {
-                clearInterval(interval);
-                lockBoard = true;
-                display.textContent = "Time: 00:00 " ;
-                openModal('Time is up!');
-
-            }
-
-        }, 1000);
     }
 
     cards.forEach(card => card.addEventListener('click', flipCard));
