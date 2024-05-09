@@ -49,8 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (--timer < 0) {
                 clearInterval(interval);
                 lockBoard = true;
-                display.textContent = "Time: 00:00";
-                openModal('Time is up!');
+                
+                if (matchedCards.length === cards.length) {
+                    clearInterval(timer);
+                    display.textContent = "Time: 00:00";
+                } 
+                else{
+                    display.textContent = "Time: 00:00";
+                    openModal('Time is up!');}
+                
             }
 
         }, 1000);
