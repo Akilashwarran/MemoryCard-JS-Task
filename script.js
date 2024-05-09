@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let matchedCards = [];
     let firstCard, secondCard;
     let lockBoard = false;
-    let timer; // Declare timer globally
+    let timer;
 
     function flipCard() {
         if (lockBoard) return;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             matchedCards.push(firstCard, secondCard);
             if (matchedCards.length === cards.length) {
                 clearInterval(timer);
-                alert('Congratulations! You won!');
+                openModal('Congratulations! You won!');
             }
         } else {
             lockBoard = true;
@@ -97,11 +97,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             display.textContent = "Time: " + minutes + ":" + seconds;
 
-            if (--timer < 0) {
+                    if (--timer < 0) {
                 clearInterval(interval);
                 lockBoard = true;
-                alert('Time is up!');
+                openModal('Time is up!');
             }
+
         }, 1000);
     }
 
@@ -185,4 +186,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 });
+
+
+
+
+var modal = document.getElementById("myModal");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+function openModal(message) {
+  document.getElementById('modal-message').textContent = message;
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
 
