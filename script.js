@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         secondCard = this;
         checkForMatch();
-         startTimer(20, timerDisplay);
+         startTimer(19, timerDisplay);
     }
     function addSprinkles() {
     let colors = ["#ffcc00", "#ff6699", "#66ccff", "#99ff99"];
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sprinkles.style.borderRadius = shape === "circle" ? "50%" : shape === "triangle" ? "50% 50% 0 0" : "0";
         sprinkles.style.left = Math.random() * 100 + "%";
         sprinkles.style.top = Math.random() * 100 + "%";
-        document.body.appendChild(sprinkles); // Add sprinkles to the body
+        document.body.appendChild(sprinkles); 
         setTimeout(() => {
             sprinkles.remove();
         }, Math.random() * 1000);
@@ -100,7 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (--timer < 0) {
                 clearInterval(interval);
                 lockBoard = true;
+                display.textContent = "Time: 00:00 " ;
                 openModal('Time is up!');
+
             }
 
         }, 1000);
@@ -111,12 +113,12 @@ document.addEventListener("DOMContentLoaded", function () {
    
 
     var imgPaths = [
-        "assets/akil.jpeg",
-        "assets/asha.jpeg",
-        "assets/jey.webp",
-        "assets/theekshi.webp",
-        "assets/pattabi.jpeg",
-        "assets/vicky.jpeg"
+        "assets/praba.jpeg",
+        "assets/mukesh.jpeg",
+        "assets/karthik.jpeg",
+        "assets/sunil.jpeg",
+        "assets/srija.jpeg",
+        "assets/vidhya.jpeg"
     ];
 
 
@@ -145,42 +147,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     var refreshbtn = document.querySelector('button');
-     refreshbtn.addEventListener('click', function() {
-    flips = 0; 
-    flipsDisplay.textContent = 'Flips: ' + flips; 
-    
-    // clearInterval(startTimer()); 
-   
-    // startTimer(20, timerDisplay);
-    
-    setImgSrc(); 
-});
+    refreshbtn.addEventListener('click', function() {
+        location.reload();
+    });
 
 });
 
-
-//----------------------- selection types -------------------
-
-// var modal = document.getElementById("modal");
-
-// var btn = document.getElementById("openModalBtn");
-
-// var span = document.getElementsByClassName("close")[0];
-
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-// ----------------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function() {
 
